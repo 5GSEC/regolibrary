@@ -5,7 +5,7 @@ import future.keywords.in
 # Define the input parameters
 params := {
   "source_pod_labels": {"workload.nephio.org/oai": "smf"},
-  "destination_pod_labels": {"workload.nephio.org/oai": "upf"}
+  "destination_pod_labels": {"workload.nephio.org/oai": "ausf"}
 }
 
 # Rule to check if a NetworkPolicy allows egress from source pod to destination pod
