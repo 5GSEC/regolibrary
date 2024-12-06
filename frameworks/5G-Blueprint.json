@@ -1,16 +1,18 @@
 {
     "name": "5GBlueprint",
-    "description": "This framework is recommended for use in 5G Security",
+    "description": "Framework for scanning 5G workloads",
     "attributes": {
+        "builtin": true
     },
-    "scanningScope": {
-        "matches": [
-            "cluster",
-            "file"
-        ]
-    },
-    "controlsNames": [
-        "Naked pods",
-        "Egress from a pod"
+    "typeTags": [
+        "security"
+    ],
+    "activeControls": [
+        {
+            "controlID": "C-0275",
+            "patch": {
+                "name": "Egress from a pod"
+            }
+        }
     ]
 }
