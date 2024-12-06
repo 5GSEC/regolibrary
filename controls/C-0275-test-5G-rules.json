@@ -1,0 +1,27 @@
+{
+    "name": "Egress from a pod",
+    "attributes": {
+    },
+    "description": "SMF should only have egress connection to UPF",
+    "remediation": "Create a network policy to add an egress rule",
+    "rulesNames": [
+        "test-egress-5G"
+    ],
+    "long_description": "SMF should only have egress connection to UPF.",
+    "test": "Check that there are no pods in the 'default' namespace",
+    "id": "C-0275",
+    "controlID": "C-0275",
+    "baseScore": 3, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

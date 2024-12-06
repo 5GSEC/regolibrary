@@ -1,0 +1,16 @@
+{
+    "name": "5GBlueprint",
+    "description": "This framework is recommended for use in 5G Security",
+    "attributes": {
+    },
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+    "controlsNames": [
+        "Naked pods",
+        "Egress from a pod"
+    ]
+}
