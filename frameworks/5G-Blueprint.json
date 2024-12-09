@@ -9,9 +9,9 @@
     ],
     "activeControls": [
         {
-            "controlID": "C-0275",
+            "controlID": "5G-0001",
             "patch": {
-                "name": "Egress from a pod"
+                "name": "Ingress and Egress blocked"
             }
         }
     ]

@@ -1,38 +1,111 @@
 package armo_builtins
 
-import future.keywords.in
 
-# Define the input parameters
-params := {
-  "source_pod_labels": {"workload.nephio.org/oai": "smf"},
-  "destination_pod_labels": {"workload.nephio.org/oai": "ausf"}
+oai_input := [
+        {
+            "workload_name": "CU-UP",
+            "labels": [
+                "app.kubernetes.io/name=oai-gnb-cu-up"
+            ],
+            "sensitive_asset_locations": [
+                "/opt/oai-gnb/etc/gnb.conf",
+                "/opt/oai-gnb/bin/nr-cuup",
+                "/run/secrets/kubernetes.io/serviceaccount/"
+            ],
+            "egress": [
+                "DU"
+            ]
+        },
+        {
+            "workload_name": "SMF",
+            "labels": [
+                "workload.nephio.org/oai=smf"
+            ],
+            "sensitive_asset_locations": [
+                "/run/secrets/kubernetes.io/serviceaccount/",
+                "/openair-smf/bin/oai_smf",
+                "/openair-smf/etc/smf.yaml"
+            ],
+            "egress": [
+                "UPF"
+            ]
+        },
+        {
+            "workload_name": "UPF",
+            "labels": [
+                "workload.nephio.org/oai=upf"
+            ],
+            "sensitive_asset_locations": [
+                "/run/secrets/kubernetes.io/serviceaccount/",
+                "/openair-upf/bin/oai_upf",
+                "/openair-upf/etc/upf.yaml"
+            ],
+            "ingress": [
+                "SMF"
+            ]
+        }
+]
+
+input_to_pods[oai, pod] := podnames {
+	oai := oai_input[_]
+	pod_name := oai_input.workload_name
+	podnames := [podname | label := mock_pods.labels[_] 
+									s := pod.metadata.labels[_]
+									s  ]
 }
 
-# Rule to check if a NetworkPolicy allows egress from source pod to destination pod
-deny[msg] {
-  input.kind == "NetworkPolicy"
-  policy := input
-  
-  # Check if the policy applies to the source pod
-  matches_source_pod(policy.spec.podSelector)
-  
-  # Check if the policy has egress rules
-  "Egress" in policy.spec.policyTypes
-  
-  # Check if any egress rule allows connection to the destination pod
-  not any_egress_rule_allows_destination(policy.spec.egress)
-  
-  msg := sprintf("NetworkPolicy %s does not allow egress from %v to %v", [policy.metadata.name, params.source_pod_labels, params.destination_pod_labels])
+
+# For pods
+deny[msga] {
+ 		pods := [pod |  pod= input[_]; pod.kind == "Pod"]
+		networkpolicies := [networkpolicie |  networkpolicie= input[_]; networkpolicie.kind == "NetworkPolicy"]
+		pod := pods[_]
+		network_policies_connected_to_pod := [networkpolicie |  networkpolicie= networkpolicies[_];  pod_connected_to_network_policy(pod, networkpolicie)]
+		count(network_policies_connected_to_pod) > 0
+        goodPolicies := [goodpolicie |  goodpolicie= network_policies_connected_to_pod[_];  is_ingerss_egress_policy(goodpolicie)]
+		count(goodPolicies) < 1
+
+    msga := {
+		"alertMessage": sprintf("Pod: %v does not have ingress/egress defined", [pod.metadata.name]),
+		"packagename": "armo_builtins",
+		"alertScore": 7,
+		"failedPaths": [],
+		"fixPaths": [],
+		"alertObject": {
+			"k8sApiObjects": [pod]
+		}
+	}
+
 }
 
-# Helper function to check if the policy applies to the source pod
-matches_source_pod(podSelector) {
-  all([params.source_pod_labels[k] == v | v = podSelector.matchLabels[k]])
+# For pods
+deny[msga] {
+ 		pods := [pod |  pod= input[_]; pod.kind == "Pod"]
+		networkpolicies := [networkpolicie |  networkpolicie= input[_]; networkpolicie.kind == "NetworkPolicy"]
+		pod := pods[_]
+		network_policies_connected_to_pod := [networkpolicie |  networkpolicie= networkpolicies[_];  pod_connected_to_network_policy(pod, networkpolicie)]
+		count(network_policies_connected_to_pod) < 1
+
+    msga := {
+		"alertMessage": sprintf("Pod: %v does not have ingress/egress defined", [pod.metadata.name]),
+		"packagename": "armo_builtins",
+		"alertScore": 7,
+		"failedPaths": [],
+		"fixPaths": [],
+		"alertObject": {
+			"k8sApiObjects": [pod]
+		}
+	}
+
 }
 
-# Helper function to check if any egress rule allows connection to the destination pod
-any_egress_rule_allows_destination(egress_rules) {
-  some rule in egress_rules
-  some to in rule.to
-  to.podSelector.matchLabels == params.destination_pod_labels
+pod_connected_to_network_policy(pod, networkpolicie){
+	is_same_namespace(networkpolicie.metadata, pod.metadata)
+    count(networkpolicie.spec.podSelector) > 0
+    count({x | networkpolicie.spec.podSelector.matchLabels[x] == pod.metadata.labels[x]}) == count(networkpolicie.spec.podSelector.matchLabels)
+}
+
+pod_connected_to_network_policy(pod, networkpolicie){
+	is_same_namespace(networkpolicie.metadata ,pod.metadata)
+    count(networkpolicie.spec.podSelector) == 0
 }
