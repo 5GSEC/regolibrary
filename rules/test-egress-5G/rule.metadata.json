@@ -6,13 +6,14 @@
     "match": [
       {
         "apiGroups": [
-          ""
+          "apps"
         ],
         "apiVersions": [
           "v1"
         ],
         "resources": [
-          "Pod"
+            "Deployment",
+            "ReplicaSet"
         ]
       },
       {
