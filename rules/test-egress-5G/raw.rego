@@ -55,10 +55,6 @@ all_labels_match(pod, workload) {
     count(workload.labels) == 0
 }
 
-is_egress_networkpolicy(work_list, networkpolicie) {
-
-}
-
 pod_connected_to_network_policy(pod, networkpolicie){
     count(networkpolicie.spec.podSelector) > 0
     count({x | networkpolicie.spec.podSelector.matchLabels[x] == pod.metadata.labels[x]}) == count(networkpolicie.spec.podSelector.matchLabels)
