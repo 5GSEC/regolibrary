@@ -1,10 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: default-deny-all
-  namespace: my-ns
+  name: allow-smf-to-upf
+  namespace: oai-core
 spec:
-  podSelector: {}
+  podSelector: {} # Applies to pods with label 'app=pod1'
   policyTypes:
-    - Ingress
-    - Egress
+  - Egress
+  - Ingress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          workload.nephio.org/oai: upf # Allows traffic to pods with label 'app=pod2'
+    ports:
+    - protocol: TCP
+      port: 80  # Example port (e.g., HTTP)

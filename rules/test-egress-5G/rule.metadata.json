@@ -51,6 +51,17 @@
         "resources": [
             "NetworkPolicy"
         ]
+      },
+      {
+        "apiGroups": [
+          "security.seran.org"
+        ],
+        "apiVersions": [
+          "v1alpha1"
+        ],
+        "resources": [
+            "WorkloadConfig"
+        ]       
       }
     ],
     "ruleDependencies": [

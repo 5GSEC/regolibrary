@@ -1,17 +1,63 @@
 apiVersion: v1
 kind: Pod
 metadata:
-    name: test
-    namespace: my-ns
+  labels:
+    workload.nephio.org/oai: smf
+  name: smf-core
+  namespace: oai-core
 spec:
-      containers:
-      - args:
-        - server
-        env:
-          - name: BASE_HREF
-            value: /argo/
-        image: test:latest
-        name: test
-        imagePullPolicy: Never
-      - name : test2
-        image : test
+  containers:
+  - command:
+    - /openair-smf/bin/oai_smf
+    - -c
+    - /openair-smf/etc/smf.yaml
+    - -o
+    image: docker.io/oaisoftwarealliance/oai-smf:v2.0.1
+    imagePullPolicy: IfNotPresent
+    name: smf-core
+    ports:
+    - containerPort: 8805
+      name: n4
+      protocol: UDP
+    - containerPort: 80
+      name: sbi
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 100m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 512Mi
+    volumeMounts:
+    - mountPath: /openair-smf/etc
+      name: configuration
+  initContainers:
+  - command:
+    - sh
+    - -c
+    - until curl --connect-timeout 1 --head -X GET http://oai-nrf/nnrf-nfm/v1/nf-instances?nf-type='NRF' --http2-prior-knowledge; do echo waiting for nrf svc oai-nrf to respond; sleep 1; done
+    image: docker.io/alpine/curl:3.14
+    imagePullPolicy: IfNotPresent
+    name: init
+  nodeName: core-md-0-nhd2g-49fkx-8d65n
+  restartPolicy: Always
+  securityContext:
+    runAsGroup: 0
+    runAsUser: 0
+  serviceAccount: smf-core
+  serviceAccountName: smf-core
+  terminationGracePeriodSeconds: 5
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      name: smf-core
+    name: configuration

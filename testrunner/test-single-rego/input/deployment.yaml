@@ -1,40 +1,36 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: security.seran.org/v1alpha1
+kind: WorkloadConfig
 metadata:
-  name: my-deployment
-  labels:
-    app : goproxy
+  name: oai-workload-config
 spec:
-  selector:
-    matchLabels:
-      app : goproxy
-  template:
-    metadata :
-      name : goproxy
-      labels :
-        app : goproxy
-    spec :
-      hostNetwork: true
-      containers :
-        -
-          name : mysql
-          image : mysql
-          securityContext:
-            allowPrivilegeEscalation: true
-          env :
-            -
-              name : MYSQL_ROOT_PASSWORD
-              value : "rootpasswd"
-        -
-          name : php
-          image : registry.hub.docker.com/php:7.0-apache
-          volumeMounts :
-            -
-              mountPath : /var/www/html
-              name : site-data
-              subPath : html
-      volumes :
-        -
-          name : site-data
-          persistentVolumeClaim :
-            claimName : my-lamp-site-data
+  workloads:
+
+    - workload_name: UPF
+      labels:
+        workload.nephio.org/oai: upf
+      sensitive_asset_locations:
+        - /run/secrets/kubernetes.io/serviceaccount/
+        - /openair-upf/bin/oai_upf
+        - /openair-upf/etc/upf.yaml
+      ingress:
+        - SMF
+    
+    - workload_name: SMF
+      labels:
+        workload.nephio.org/oai: smf
+      sensitive_asset_locations:
+        - /run/secrets/kubernetes.io/serviceaccount/
+        - /openair-smf/bin/oai_smf
+        - /openair-smf/etc/smf.yaml
+      egress:
+        - UPF
+
+    - workload_name: UDR
+      labels:
+        workload.nephio.org/oai: udr
+      sensitive_asset_locations:
+        - /run/secrets/kubernetes.io/serviceaccount/
+        - /openair-udr/bin/oai_udr
+        - /openair-udr/etc/udr.yaml
+      ingress:
+        - UDM
