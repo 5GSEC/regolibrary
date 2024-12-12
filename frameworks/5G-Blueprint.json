@@ -11,7 +11,7 @@
         {
             "controlID": "5G-0001",
             "patch": {
-                "name": "Ingress and Egress blocked"
+                "name": "Egress from a pod"
             }
         }
     ]
