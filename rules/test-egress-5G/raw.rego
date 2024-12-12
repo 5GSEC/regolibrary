@@ -6,7 +6,7 @@ deny[msga] {
         work := workloads[_]
         work_list := work.spec.workloads[_]
 
-        pods := [p | p = input[_]; p.kind == "Pod"]
+        pods := [p | p = input[_]; p.kind == "ReplicaSet"]
         pod := pods[_]
       not all_labels_match(pod, work_list)
 
