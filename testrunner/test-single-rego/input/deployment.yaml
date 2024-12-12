@@ -4,7 +4,6 @@ metadata:
   name: oai-workload-config
 spec:
   workloads:
-
     - workload_name: UPF
       labels:
         workload.nephio.org/oai: upf
@@ -13,8 +12,7 @@ spec:
         - /openair-upf/bin/oai_upf
         - /openair-upf/etc/upf.yaml
       ingress:
-        - SMF
-    
+        - SMF    
     - workload_name: SMF
       labels:
         workload.nephio.org/oai: smf
@@ -24,7 +22,6 @@ spec:
         - /openair-smf/etc/smf.yaml
       egress:
         - UPF
-
     - workload_name: UDR
       labels:
         workload.nephio.org/oai: udr

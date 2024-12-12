@@ -4,7 +4,9 @@ metadata:
   name: allow-smf-to-upf
   namespace: oai-core
 spec:
-  podSelector: {} # Applies to pods with label 'app=pod1'
+  podSelector:
+    matchLabels: 
+      workload.nephio.org/oai: smf # Applies to pods with label 'app=pod1'
   policyTypes:
   - Egress
   - Ingress
