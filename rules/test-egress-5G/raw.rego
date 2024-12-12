@@ -34,13 +34,13 @@ deny[msga] {
 
 
         msga := {
-		"alertMessage": sprintf("Workload %v is not present", [work_list.workload_name]),
+		"alertMessage": sprintf("Workload %v is not present", [pod.metadata.name]),
 		"packagename": "armo_builtins",
 		"alertScore": 7,
 		"failedPaths": [],
 		"fixPaths": [],
 		"alertObject": {
-			"k8sApiObjects": []
+			"k8sApiObjects": [[pod]]
 		}
 	}
 }
