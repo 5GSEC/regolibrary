@@ -17,32 +17,6 @@
       },
       {
         "apiGroups": [
-          "apps"
-        ],
-        "apiVersions": [
-          "v1"
-        ],
-        "resources": [
-            "Deployment",
-            "ReplicaSet",
-            "DaemonSet",
-            "StatefulSet"
-        ]
-      },
-      {
-        "apiGroups": [
-          "batch"
-        ],
-        "apiVersions": [
-          "*"
-        ],
-        "resources": [
-            "Job",
-            "CronJob"
-        ]
-      },
-      {
-        "apiGroups": [
           "networking.k8s.io"
         ],
         "apiVersions": [
