@@ -11,13 +11,13 @@ deny[msga] {
       not all_labels_match(pod, work_list)
 
         msga := {
-		"alertMessage": sprintf("Workload %v is not present", [work_list.workload_name]),
+		"alertMessage": sprintf("Workload %v is not present", [pod.metadata.name]),
 		"packagename": "armo_builtins",
 		"alertScore": 7,
 		"failedPaths": [],
 		"fixPaths": [],
 		"alertObject": {
-			"k8sApiObjects": []
+			"k8sApiObjects": [pod]
 		}
 	}
 }
