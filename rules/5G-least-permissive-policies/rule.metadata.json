@@ -1,0 +1,46 @@
+{
+    "name": "5G-least-permissive-policies",
+    "attributes": {
+    },
+    "ruleLanguage": "Rego",
+    "match": [
+      {
+        "apiGroups": [
+          "apps"
+        ],
+        "apiVersions": [
+          "v1"
+        ],
+        "resources": [
+            "Deployment"
+        ]
+      },
+      {
+        "apiGroups": [
+          "security.kubearmor.com"
+        ],
+        "apiVersions": [
+          "v1"
+        ],
+        "resources": [
+            "KubeArmorPolicy"
+        ]
+      },
+      {
+        "apiGroups": [
+          "security.seran.org"
+        ],
+        "apiVersions": [
+          "v1alpha1"
+        ],
+        "resources": [
+            "WorkloadConfig"
+        ]       
+      }
+    ],
+    "ruleDependencies": [
+    ],
+    "description": "fails if there are no least permissive policies for sensitive assets",
+    "remediation": "Make sure sensitive assets are protected with Kubearmor Policies",
+    "ruleQuery": "armo_builtins"
+}

@@ -1,0 +1,27 @@
+{
+    "name": "Least Permissive Policies for Sensitive Assets",
+    "attributes": {
+    },
+    "description": "There should be kubearmor policies for the defined sensitive assets",
+    "remediation": "Create a Kubearmor policy for the given assets",
+    "rulesNames": [
+        "5G-least-permissive-policies"
+    ],
+    "long_description": "There should be kubearmor policies for the defined sensitive assets",
+    "test": "Check that there are no pods whose sensitive assets are not protected",
+    "id": "5G-0001",
+    "controlID": "5G-0002",
+    "baseScore": 3, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}
