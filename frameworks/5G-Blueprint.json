@@ -11,8 +11,26 @@
         {
             "controlID": "5G-0001",
             "patch": {
-                "name": "Egress from a pod"
+                "name": "Egress from the defined pod"
             }
+        },
+        {
+            "controlID": "C-0046",
+            "patch": {
+                "name": "Insecure capabilities"
+            }           
+        },
+        {
+            "controlID": "C-0016",
+            "patch": {
+                "name": "Allow privilege escalation"
+            }               
+        },
+        {
+            "controlID": "C-0267",
+            "patch": {
+                "name": "Workload with cluster takeover roles"
+            }              
         }
     ]
 }
