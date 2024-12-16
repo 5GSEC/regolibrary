@@ -15,6 +15,12 @@
             }
         },
         {
+            "controlID": "5G-0002",
+            "patch": {
+                "name": "Least Permissive Policies for Sensitive Assets"
+            }
+        },
+        {
             "controlID": "C-0046",
             "patch": {
                 "name": "Insecure capabilities"
