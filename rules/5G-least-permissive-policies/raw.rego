@@ -88,7 +88,7 @@ wlConnectedToKubeArmorPolicy(wl, kubearmorpolicie){
 }
 
 
-wlConnectedToNetworkPolicy(wl, kubearmorpolicie){
+wlConnectedToKubeArmorPolicy(wl, kubearmorpolicie){
 	count(kubearmorpolicie.spec.selector.matchLabels) > 0
     count({x | kubearmorpolicie.spec.selector.matchLabels[x] == wl.spec.template.metadata.labels[x]}) == count(kubearmorpolicie.spec.selector.matchLabels)
 }
