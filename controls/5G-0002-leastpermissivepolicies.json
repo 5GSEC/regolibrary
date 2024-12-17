@@ -9,7 +9,7 @@
     ],
     "long_description": "There should be kubearmor policies for the defined sensitive assets",
     "test": "Check that there are no pods whose sensitive assets are not protected",
-    "id": "5G-0001",
+    "id": "5G-0002",
     "controlID": "5G-0002",
     "baseScore": 3, 
     "scanningScope": {

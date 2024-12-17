@@ -1,13 +1,13 @@
 {
-    "name": "Egress from a pod",
+    "name": "Egress from the necessary workloads",
     "attributes": {
     },
-    "description": "SMF should only have egress connection to UPF",
+    "description": "The given pod should have an egress/ingress policy.",
     "remediation": "Create a network policy to add an egress rule",
     "rulesNames": [
         "test-egress-5G"
     ],
-    "long_description": "SMF should only have egress connection to UPF.",
+    "long_description": "The given pod should have an egress/ingress policy from the defined pod in the workload mapping",
     "test": "Check that there are no pods in the 'default' namespace",
     "id": "5G-0001",
     "controlID": "5G-0001",

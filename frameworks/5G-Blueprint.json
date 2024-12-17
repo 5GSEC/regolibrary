@@ -11,7 +11,7 @@
         {
             "controlID": "5G-0001",
             "patch": {
-                "name": "Egress from the defined pod"
+                "name": "Egress from the necessary workloads"
             }
         },
         {
