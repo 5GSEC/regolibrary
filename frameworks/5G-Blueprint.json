@@ -11,7 +11,7 @@
         {
             "controlID": "5G-0001",
             "patch": {
-                "name": "Egress from the necessary workloads"
+                "name": "Ingress/Egress from the necessary workloads"
             }
         },
         {
@@ -37,6 +37,12 @@
             "patch": {
                 "name": "Workload with cluster takeover roles"
             }              
+        },
+        {
+            "controlID": "C-0083",
+            "patch": {
+                "name": "Workloads with Critical vulnerabilities exposed to external traffic"
+            }     
         }
     ]
 }

@@ -24,6 +24,7 @@ deny[msga] {
 	}
 }
 
+
 deny[msga] {
 
      	workloads := [w |  w= input[_]; w.kind == "WorkloadConfig"]
@@ -62,7 +63,7 @@ deny[msga] {
         labels_match(work, pod)
 		kubearmor_policies_connected_to_pod := [kubearmorpolicie |  kubearmorpolicie= kubearmorpolicies[_];  wlConnectedToKubeArmorPolicy(pod, kubearmorpolicie)]
 		count(kubearmor_policies_connected_to_pod) > 0
-	    # goodPolicies := [goodpolicie |  goodpolicie= network_policies_connected_to_pod[_];  is_ingerss_egress_policy(goodpolicie)]
+	    # goodPolicies := [goodpolicie |  goodpolicie= kubearmor_policies_connected_to_pod[_];  sensitiveAssetsDirProtected(pod, goodpolicie)]
 	    # count(goodPolicies) < 1
 
         msga := {
@@ -80,7 +81,7 @@ deny[msga] {
 labels_match(work, pod) {
       some i
 	  some key,value in work.spec.workloads[i].labels
-      pod.metadata.labels[key] == value
+      pod.spec.selector.matchLabels[key] == value
 }
 
 wlConnectedToKubeArmorPolicy(wl, kubearmorpolicie){
@@ -93,12 +94,15 @@ wlConnectedToKubeArmorPolicy(wl, kubearmorpolicie){
     count({x | kubearmorpolicie.spec.selector.matchLabels[x] == wl.spec.template.metadata.labels[x]}) == count(kubearmorpolicie.spec.selector.matchLabels)
 }
 
-is_ingerss_egress_policy(networkpolicie) {
-    list_contains(networkpolicie.spec.policyTypes, "Ingress")
-    list_contains(networkpolicie.spec.policyTypes, "Egress")
- }
+# sensitiveAssetsDirProtected(wlconfig, kubearmorpolicie) {
+# 	some i
+# 	some j
+# 	endswith(wlconfig.spec.workloads[i].sensitive_asset_locations[j], "/")
+# 	asset := wlconfig.spec.workloads[i].sensitive_asset_locations[j]
+# 	some k
+# 	kubearmorpolicie.spec.matchDirectories[k].dir == asset
+# }
 
-list_contains(list, element) {
-  some i
-  list[i] == element
-}
+
+
+
