@@ -11,7 +11,7 @@
     "test": "Check that there are no pods whose sensitive assets are not protected",
     "id": "5G-0002",
     "controlID": "5G-0002",
-    "baseScore": 3, 
+    "baseScore": 8.0, 
     "scanningScope": {
         "matches": [
             "cluster",
