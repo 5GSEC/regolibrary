@@ -1,5 +1,5 @@
 {
-    "name": "test-egress-5G",
+    "name": "5G-egress-ingress-defined",
     "attributes": {
     },
     "ruleLanguage": "Rego",

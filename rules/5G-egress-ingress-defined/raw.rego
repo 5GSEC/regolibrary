@@ -4,7 +4,7 @@ import future.keywords.in
 
 deny[msga] {
     # workloads := input.spec.workloads
-     		workloads := [w |  w= input[_]; w.kind == "WorkloadConfig"]
+     	workloads := [w |  w= input[_]; w.kind == "WorkloadConfig"]
         work := workloads[_]
         # work_list := work.spec.workloads[_]
 

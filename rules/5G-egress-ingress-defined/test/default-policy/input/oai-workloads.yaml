@@ -1,0 +1,36 @@
+apiVersion: security.seran.org/v1alpha1
+kind: WorkloadConfig
+metadata:
+  name: oai-workload-config
+spec:
+  workloads:
+
+    - workload_name: UPF
+      labels:
+        workload.nephio.org/oai: upf
+      sensitive_asset_locations:
+        - /run/secrets/kubernetes.io/serviceaccount/
+        - /openair-upf/bin/oai_upf
+        - /openair-upf/etc/upf.yaml
+      ingress:
+        - SMF
+    
+    - workload_name: SMF
+      labels:
+        workload.nephio.org/oai: smf
+      sensitive_asset_locations:
+        - /run/secrets/kubernetes.io/serviceaccount/
+        - /openair-smf/bin/oai_smf
+        - /openair-smf/etc/smf.yaml
+      egress:
+        - UPF
+
+    - workload_name: UDR
+      labels:
+        workload.nephio.org/oai: udr
+      sensitive_asset_locations:
+        - /run/secrets/kubernetes.io/serviceaccount/
+        - /openair-udr/bin/oai_udr
+        - /openair-udr/etc/udr.yaml
+      ingress:
+        - UDM
