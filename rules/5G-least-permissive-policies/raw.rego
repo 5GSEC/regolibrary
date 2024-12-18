@@ -51,32 +51,32 @@ deny[msga] {
 	}
 }
 
-deny[msga] {
+# deny[msga] {
 
-        pods := [p | p = input[_]; p.kind == "Deployment"]
-        pod := pods[_]
+#         pods := [p | p = input[_]; p.kind == "Deployment"]
+#         pod := pods[_]
 
-		workloads := [w |  w= input[_]; w.kind == "WorkloadConfig"]
-        work := workloads[_]
+# 		workloads := [w |  w= input[_]; w.kind == "WorkloadConfig"]
+#         work := workloads[_]
 
-		kubearmorpolicies := [kubearmorpolicie |  kubearmorpolicie= input[_]; kubearmorpolicie.kind == "KubeArmorPolicy"]
-        labels_match(work, pod)
-		kubearmor_policies_connected_to_pod := [kubearmorpolicie |  kubearmorpolicie= kubearmorpolicies[_];  wlConnectedToKubeArmorPolicy(pod, kubearmorpolicie)]
-		count(kubearmor_policies_connected_to_pod) > 0
-	    # goodPolicies := [goodpolicie |  goodpolicie= kubearmor_policies_connected_to_pod[_];  sensitiveAssetsDirProtected(pod, goodpolicie)]
-	    # count(goodPolicies) < 1
+# 		kubearmorpolicies := [kubearmorpolicie |  kubearmorpolicie= input[_]; kubearmorpolicie.kind == "KubeArmorPolicy"]
+#         labels_match(work, pod)
+# 		kubearmor_policies_connected_to_pod := [kubearmorpolicie |  kubearmorpolicie= kubearmorpolicies[_];  wlConnectedToKubeArmorPolicy(pod, kubearmorpolicie)]
+# 		count(kubearmor_policies_connected_to_pod)  0
+# 	    # goodPolicies := [goodpolicie |  goodpolicie= kubearmor_policies_connected_to_pod[_];  sensitiveAssetsDirProtected(pod, goodpolicie)]
+# 	    # count(goodPolicies) < 1
 
-        msga := {
-		"alertMessage": sprintf("Workload %v does have Least Permissive Policies for sensitive assets", [pod.metadata.name]),
-		"packagename": "armo_builtins",
-		"alertScore": 7,
-		"failedPaths": [],
-		"fixPaths": [],
-		"alertObject": {
-			"k8sApiObjects": [pod]
-		}
-	}
-}
+#         msga := {
+# 		"alertMessage": sprintf("Workload %v does have Least Permissive Policies for sensitive assets", [pod.metadata.name]),
+# 		"packagename": "armo_builtins",
+# 		"alertScore": 7,
+# 		"failedPaths": [],
+# 		"fixPaths": [],
+# 		"alertObject": {
+# 			"k8sApiObjects": [pod]
+# 		}
+# 	}
+# }
 # Function to check if labels match between work_list and pod
 labels_match(work, pod) {
       some i
