@@ -8,7 +8,7 @@
         "5G-egress-ingress-defined"
     ],
     "long_description": "The given pod should have an egress/ingress policy from the defined pod in the workload mapping",
-    "test": "Check that there are no pods in the 'default' namespace",
+    "test": "Check that there are ingress/egress defined in the mappings",
     "id": "5G-0001",
     "controlID": "5G-0001",
     "baseScore": 8.0, 
