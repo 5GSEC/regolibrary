@@ -34,7 +34,7 @@ deny[msga] {
 
 		networkpolicies := [networkpolicie |  networkpolicie= input[_]; networkpolicie.kind == "NetworkPolicy"]
         labels_match(work, pod)
-		network_policies_connected_to_pod := [networkpolicie |  networkpolicie= networkpolicies[_];  wlConnectedToNetworkPolicy(pod, networkpolicie)]
+		network_policies_connected_to_pod := [networkpolicie |  networkpolicie= networkpolicies[_];  check_zerotrust(work, networkpolicie)]
 		count(network_policies_connected_to_pod) < 1
 
 
@@ -60,14 +60,12 @@ deny[msga] {
 
 		networkpolicies := [networkpolicie |  networkpolicie= input[_]; networkpolicie.kind == "NetworkPolicy"]
         labels_match(work, pod)
-		network_policies_connected_to_pod := [networkpolicie |  networkpolicie= networkpolicies[_];  wlConnectedToNetworkPolicy(pod, networkpolicie)]
+		network_policies_connected_to_pod := [networkpolicie |  networkpolicie= networkpolicies[_];  check_zerotrust(work, networkpolicie)]
 		count(network_policies_connected_to_pod) > 0
-	    goodPolicies := [goodpolicie |  goodpolicie= network_policies_connected_to_pod[_];  is_ingerss_egress_policy(goodpolicie)]
-	    count(goodPolicies) < 1
 
 
         msga := {
-		"alertMessage": sprintf("Workload %v does NOT have an Ingress/Egress Policy", [pod.metadata.name]),
+		"alertMessage": sprintf("Workload %v does have an Ingress/Egress Policy", [pod.metadata.name]),
 		"packagename": "armo_builtins",
 		"alertScore": 7,
 		"failedPaths": [],
@@ -84,22 +82,32 @@ labels_match(work, pod) {
       pod.metadata.labels[key] == value
 }
 
-wlConnectedToNetworkPolicy(wl, networkpolicie){
-    count(networkpolicie.spec.podSelector) == 0
+# wlConnectedToNetworkPolicy(wl, networkpolicie){
+#     count(networkpolicie.spec.podSelector) == 0
+# }
+
+
+# wlConnectedToNetworkPolicy(wl, networkpolicie){
+# 	count(networkpolicie.spec.podSelector) > 0
+#     count({x | networkpolicie.spec.podSelector.matchLabels[x] == wl.spec.template.metadata.labels[x]}) == count(networkpolicie.spec.podSelector.matchLabels)
+# }
+
+# is_ingerss_egress_policy(networkpolicie) {
+#     list_contains(networkpolicie.spec.policyTypes, "Ingress")
+#     list_contains(networkpolicie.spec.policyTypes, "Egress")
+#  }
+
+check_zerotrust(wlconfig, networkpolicie) {
+	some i
+	wlpolicie := wlconfig.spec.workloads[i].policies[_]
+	networkpolicie.metadata.name == wlpolicie.name
 }
 
 
-wlConnectedToNetworkPolicy(wl, networkpolicie){
-	count(networkpolicie.spec.podSelector) > 0
-    count({x | networkpolicie.spec.podSelector.matchLabels[x] == wl.spec.template.metadata.labels[x]}) == count(networkpolicie.spec.podSelector.matchLabels)
-}
-
-is_ingerss_egress_policy(networkpolicie) {
-    list_contains(networkpolicie.spec.policyTypes, "Ingress")
-    list_contains(networkpolicie.spec.policyTypes, "Egress")
- }
 
 list_contains(list, element) {
   some i
   list[i] == element
 }
+
+

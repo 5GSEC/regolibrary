@@ -35,12 +35,12 @@ deny[msga] {
 
 		kubearmorpolicies := [kubearmorpolicie |  kubearmorpolicie= input[_]; kubearmorpolicie.kind == "KubeArmorPolicy"]
         labels_match(work, pod)
-		kubearmor_policies_connected_to_pod := [kubearmorpolicie |  kubearmorpolicie= kubearmorpolicies[_];  wlConnectedToKubeArmorPolicy(pod, kubearmorpolicie)]
+		kubearmor_policies_connected_to_pod := [kubearmorpolicie |  kubearmorpolicie= kubearmorpolicies[_];  check_zerotrust(work, kubearmorpolicie)]
 		count(kubearmor_policies_connected_to_pod) < 1
 
 
         msga := {
-		"alertMessage": sprintf("Workload %v does NOT have a Kubearmor policy", [pod.metadata.name]),
+		"alertMessage": sprintf("Workload %v does NOT have any Kubearmor policy", [pod.metadata.name]),
 		"packagename": "armo_builtins",
 		"alertScore": 7,
 		"failedPaths": [],
@@ -49,6 +49,37 @@ deny[msga] {
 			"k8sApiObjects": [pod]
 		}
 	}
+}
+
+deny[msga] {
+
+     	workloads := [w |  w= input[_]; w.kind == "WorkloadConfig"]
+        work := workloads[_]
+
+        pods := [p | p = input[_]; p.kind == "Deployment"]
+        pod := pods[_]
+
+		kubearmorpolicies := [kubearmorpolicie |  kubearmorpolicie= input[_]; kubearmorpolicie.kind == "KubeArmorPolicy"]
+        labels_match(work, pod)
+		kubearmor_policies_connected_to_pod := [kubearmorpolicie |  kubearmorpolicie= kubearmorpolicies[_];  check_zerotrust(work, kubearmorpolicie)]
+		count(kubearmor_policies_connected_to_pod) > 0
+		 
+        msga := {
+		"alertMessage": sprintf("Workload %v does have zero Kubearmor policy", [pod.metadata.name]),
+		"packagename": "armo_builtins",
+		"alertScore": 7,
+		"failedPaths": [],
+		"fixPaths": [],
+		"alertObject": {
+			"k8sApiObjects": [pod]
+		}
+	}
+}
+
+check_zerotrust(wlconfig, kubearmorpolicie) {
+	some i
+	wlpolicie := wlconfig.spec.workloads[i].policies[_]
+	kubearmorpolicie.metadata.name == wlpolicie.name
 }
 
 # deny[msga] {
@@ -101,6 +132,10 @@ wlConnectedToKubeArmorPolicy(wl, kubearmorpolicie){
 # 	asset := wlconfig.spec.workloads[i].sensitive_asset_locations[j]
 # 	some k
 # 	kubearmorpolicie.spec.matchDirectories[k].dir == asset
+# }
+
+# sensitiveAssetsPathProtected(wlconfig, kubearmorpolicie) {
+# 	not sensitiveAssetsDirProtected(wlconfig, kubearmorpolicie)
 # }
 
 
