@@ -4,30 +4,112 @@ metadata:
   name: oai-workload-config
 spec:
   workloads:
-    - workload_name: UPF
+    - workload_name: CUUP
       labels:
-        workload.nephio.org/oai: upf
-      sensitive_asset_locations:
-        - /run/secrets/kubernetes.io/serviceaccount/
-        - /openair-upf/bin/oai_upf
-        - /openair-upf/etc/upf.yaml
-      ingress:
-        - SMF    
-    - workload_name: SMF
+        app.kubernetes.io/name: oai-gnb-cu-up
+      policies:
+        - name: oran-cuup-zero-trust
+          description: This is a zero trust Kubearmor Policy for ORAN CUUP, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-cuup-netpol
+          description: This is a Network Policy for ORAN CUUP, which allows network access to certain ports.
+          kind: NetworkPolicy
+
+    - workload_name: DU
       labels:
-        workload.nephio.org/oai: smf
-      sensitive_asset_locations:
-        - /run/secrets/kubernetes.io/serviceaccount/
-        - /openair-smf/bin/oai_smf
-        - /openair-smf/etc/smf.yaml
-      egress:
-        - UPF
+        app.kubernetes.io/name: oai-gnb-du
+      policies:
+        - name: oran-du-zero-trust
+          description: This is a zero trust Kubearmor Policy for ORAN DU, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-du-netpol
+          description: This is a Network Policy for ORAN DU, which allows network access to certain ports.
+          kind: NetworkPolicy
+
     - workload_name: UDR
       labels:
         workload.nephio.org/oai: udr
-      sensitive_asset_locations:
-        - /run/secrets/kubernetes.io/serviceaccount/
-        - /openair-udr/bin/oai_udr
-        - /openair-udr/etc/udr.yaml
-      ingress:
-        - UDM
+      policies:
+        - name: core-udr-zero-trust
+          description: This is a zero trust Kubearmor Policy for 5GCORE UDR, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-udr-netpol
+          description: This is a Network Policy for 5GCORE UDR component, which allows network access to certain ports.
+          kind: NetworkPolicy
+
+    - workload_name: AMF
+      labels:
+        workload.nephio.org/oai: amf
+      policies:
+        - name: core-amf-zero-trust
+          description: This is a zero trust Kubearmor Policy for 5GCORE AMF component, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-amf-netpol
+          description: This is a Network Policy for 5GCORE AMF component, which allows network access to certain ports.
+          kind: NetworkPolicy
+
+    - workload_name: AUSF
+      labels:
+        workload.nephio.org/oai: ausf
+      policies:
+        - name: core-ausf-zero-trust
+          description: This is a zero trust Kubearmor Policy for 5GCORE AUSF component, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-ausf-netpol
+          description: This is a Network Policy for 5GCORE AUSF component, which allows network access to certain ports.
+          kind: NetworkPolicy
+
+    - workload_name: NRF
+      labels:
+        workload.nephio.org/oai: nrf
+      policies:
+        - name: core-nrf-zero-trust
+          description: This is a zero trust Kubearmor Policy for 5GCORE NRF component, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-nrf-netpol
+          description: This is a Network Policy for 5GCORE NRF component, which allows network access to certain ports.
+          kind: NetworkPolicy
+
+    - workload_name: SMF
+      labels:
+        workload.nephio.org/oai: smf
+      policies:
+        - name: core-smf-zero-trust
+          description: This is a zero trust Kubearmor Policy for 5GCORE SMF component, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-smf-netpol
+          description: This is a Network Policy for 5GCORE SMF component, which allows network access to certain ports.
+          kind: NetworkPolicy
+
+    - workload_name: UDM
+      labels:
+        workload.nephio.org/oai: udm
+      policies:
+        - name: core-udm-zero-trust
+          description: This is a zero trust Kubearmor Policy for 5GCORE UDM component, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-udm-netpol
+          description: This is a Network Policy for 5GCORE UDM component, which allows network access to certain ports.
+          kind: NetworkPolicy
+
+    - workload_name: UDR
+      labels:
+        workload.nephio.org/oai: udr
+      policies:
+        - name: core-udr-zero-trust
+          description: This is a zero trust Kubearmor Policy for 5GCORE UDR component, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-udr-netpol
+          description: This is a Network Policy for 5GCORE UDR component, which allows network access to certain ports.
+          kind: NetworkPolicy
+
+    - workload_name: UPF
+      labels:
+        workload.nephio.org/oai: upf
+      policies:
+        - name: core-upf-zero-trust
+          description: This is a zero trust Kubearmor Policy for 5GCORE UPF component, which blocks external access to sensitive assets.
+          kind: KubeArmorPolicy
+        - name: oran-upf-netpol
+          description: This is a Network Policy for 5GCORE UPF component, which allows network access to certain ports.
+          kind: NetworkPolicy
