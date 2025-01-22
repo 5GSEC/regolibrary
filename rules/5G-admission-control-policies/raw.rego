@@ -1,5 +1,7 @@
 package armo_builtins
 
+import future.keywords.in
+
 deny[msga] {
     workloads := [w | w = input[_]; w.kind == "WorkloadConfig"]
     work := workloads[_]
@@ -75,10 +77,11 @@ check_kyverno(wlconfig, policy) {
     policy.metadata.name == wlpolicie.name
 }
 
+# Function to check if labels match between work_list and pod
 labels_match(work, pod) {
-    some i
-    some key, value in work.spec.workloads[i].labels
-    pod.spec.selector.matchLabels[key] == value
+      some i
+	  some key,value in work.spec.workloads[i].labels
+      pod.metadata.labels[key] == value
 }
 
 wlConnectedToClusterPolicy(wl, policy) {

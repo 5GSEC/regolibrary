@@ -17,13 +17,13 @@
       },
       {
         "apiGroups": [
-          "networking.k8s.io"
+          "kyverno.io"
         ],
         "apiVersions": [
           "v1"
         ],
         "resources": [
-            "NetworkPolicy"
+            "ClusterPolicy"
         ]
       },
       {
