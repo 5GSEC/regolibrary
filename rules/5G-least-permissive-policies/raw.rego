@@ -51,30 +51,30 @@ deny[msga] {
 	}
 }
 
-deny[msga] {
+# deny[msga] {
 
-     	workloads := [w |  w= input[_]; w.kind == "WorkloadConfig"]
-        work := workloads[_]
+#      	workloads := [w |  w= input[_]; w.kind == "WorkloadConfig"]
+#         work := workloads[_]
 
-        pods := [p | p = input[_]; p.kind == "Deployment"]
-        pod := pods[_]
+#         pods := [p | p = input[_]; p.kind == "Deployment"]
+#         pod := pods[_]
 
-		kubearmorpolicies := [kubearmorpolicie |  kubearmorpolicie= input[_]; kubearmorpolicie.kind == "KubeArmorPolicy"]
-        labels_match(work, pod)
-		kubearmor_policies_connected_to_pod := [kubearmorpolicie |  kubearmorpolicie= kubearmorpolicies[_];  check_zerotrust(work, kubearmorpolicie)]
-		count(kubearmor_policies_connected_to_pod) > 0
+# 		kubearmorpolicies := [kubearmorpolicie |  kubearmorpolicie= input[_]; kubearmorpolicie.kind == "KubeArmorPolicy"]
+#         labels_match(work, pod)
+# 		kubearmor_policies_connected_to_pod := [kubearmorpolicie |  kubearmorpolicie= kubearmorpolicies[_];  check_zerotrust(work, kubearmorpolicie)]
+# 		count(kubearmor_policies_connected_to_pod) > 0
 		 
-        msga := {
-		"alertMessage": sprintf("Workload %v does have zero Kubearmor policy", [pod.metadata.name]),
-		"packagename": "armo_builtins",
-		"alertScore": 7,
-		"failedPaths": [],
-		"fixPaths": [],
-		"alertObject": {
-			"k8sApiObjects": [pod]
-		}
-	}
-}
+#         msga := {
+# 		"alertMessage": sprintf("Workload %v does have zero Kubearmor policy", [pod.metadata.name]),
+# 		"packagename": "armo_builtins",
+# 		"alertScore": 7,
+# 		"failedPaths": [],
+# 		"fixPaths": [],
+# 		"alertObject": {
+# 			"k8sApiObjects": [pod]
+# 		}
+# 	}
+# }
 
 check_zerotrust(wlconfig, kubearmorpolicie) {
 	some i
