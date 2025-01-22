@@ -21,6 +21,12 @@
             }
         },
         {
+            "controlID": "5G-0003",
+            "patch": {
+                "name": "Admission Control Policies"
+            }     
+        },
+        {
             "controlID": "C-0046",
             "patch": {
                 "name": "Insecure capabilities"

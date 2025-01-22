@@ -1,0 +1,27 @@
+{
+    "name": "Admission Control Policies",
+    "attributes": {
+    },
+    "description": "There should be admission controller policies for the defined 5G workloads",
+    "remediation": "Create a Kubearmor policy for the given assets",
+    "rulesNames": [
+        "5G-admission-controller-policies"
+    ],
+    "long_description": "There should be admission controller policies for the defined 5G workloads",
+    "test": "Check that there are no pods which do not have admission control policies as defined in the workload config",
+    "id": "5G-0003",
+    "controlID": "5G-0003",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

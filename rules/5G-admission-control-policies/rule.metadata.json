@@ -1,0 +1,46 @@
+{
+    "name": "5G-admission-control-policies",
+    "attributes": {
+    },
+    "ruleLanguage": "Rego",
+    "match": [
+      {
+        "apiGroups": [
+          "apps"
+        ],
+        "apiVersions": [
+          "v1"
+        ],
+        "resources": [
+            "Deployment"
+        ]
+      },
+      {
+        "apiGroups": [
+          "networking.k8s.io"
+        ],
+        "apiVersions": [
+          "v1"
+        ],
+        "resources": [
+            "NetworkPolicy"
+        ]
+      },
+      {
+        "apiGroups": [
+          "security.seran.org"
+        ],
+        "apiVersions": [
+          "v1alpha1"
+        ],
+        "resources": [
+            "WorkloadConfig"
+        ]       
+      }
+    ],
+    "ruleDependencies": [
+    ],
+    "description": "fails if there are no ingress and egress defined for pod",
+    "remediation": "Make sure you define ingress and egress policies for all your Pods",
+    "ruleQuery": "armo_builtins"
+}
