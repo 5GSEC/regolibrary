@@ -43,7 +43,7 @@ deny[msga] {
 		"packagename": "armo_builtins",
 		"alertScore": 7,
 		"failedPaths": [],
-		"fixPaths": [],
+		"fixPaths": [{"path": sprintf("Add Network Policies for 5G workloads"), "value":"false"}],
 		"alertObject": {
 			"k8sApiObjects": [pod]
 		}
