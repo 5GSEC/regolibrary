@@ -5,7 +5,7 @@
     "description": "There should be admission controller policies for the defined 5G workloads",
     "remediation": "Create a Kubearmor policy for the given assets",
     "rulesNames": [
-        "5G-admission-controller-policies"
+        "5G-admission-control-policies"
     ],
     "long_description": "There should be admission controller policies for the defined 5G workloads",
     "test": "Check that there are no pods which do not have admission control policies as defined in the workload config",

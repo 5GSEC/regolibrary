@@ -40,7 +40,7 @@
     ],
     "ruleDependencies": [
     ],
-    "description": "fails if there are no ingress and egress defined for pod",
-    "remediation": "Make sure you define ingress and egress policies for all your Pods",
+    "description": "fails if there are no admission controller (kyverno) policies for the defined 5G pod",
+    "remediation": "Make sure you define admission controller policies for all your Pods",
     "ruleQuery": "armo_builtins"
 }
