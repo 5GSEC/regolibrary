@@ -43,7 +43,7 @@ deny[msga] {
 		"packagename": "armo_builtins",
 		"alertScore": 7,
 		"failedPaths": [],
-		"fixPaths": [{"path": sprintf("Add Network Policies for 5G workloads"), "value":"false"}],
+		"fixPaths": [{"path": sprintf("There are no Kubearmor Policies for 5G workloads: %v. Please add them", [kubearmor_policies_connected_to_pod]), "value":"false"}],
 		"alertObject": {
 			"k8sApiObjects": [pod]
 		}
