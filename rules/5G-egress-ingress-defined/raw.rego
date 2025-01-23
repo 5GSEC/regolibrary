@@ -50,31 +50,6 @@ deny[msga] {
 	}
 }
 
-deny[msga] {
-
-     	workloads := [w |  w= input[_]; w.kind == "WorkloadConfig"]
-        work := workloads[_]
-
-        pods := [p | p = input[_]; p.kind == "Deployment"]
-        pod := pods[_]
-
-		networkpolicies := [networkpolicie |  networkpolicie= input[_]; networkpolicie.kind == "NetworkPolicy"]
-        labels_match(work, pod)
-		network_policies_connected_to_pod := [networkpolicie |  networkpolicie= networkpolicies[_];  check_zerotrust(work, networkpolicie)]
-		count(network_policies_connected_to_pod) > 0
-
-
-        msga := {
-		"alertMessage": sprintf("Workload %v does have an Ingress/Egress Policy", [pod.metadata.name]),
-		"packagename": "armo_builtins",
-		"alertScore": 7,
-		"failedPaths": [],
-		"fixPaths": [],
-		"alertObject": {
-			"k8sApiObjects": [pod]
-		}
-	}
-}
 # Function to check if labels match between work_list and pod
 labels_match(work, pod) {
       some i

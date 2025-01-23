@@ -49,30 +49,6 @@ deny[msga] {
     }
 }
 
-deny[msga] {
-    workloads := [w | w = input[_]; w.kind == "WorkloadConfig"]
-    work := workloads[_]
-
-    pods := [p | p = input[_]; p.kind == "Deployment"]
-    pod := pods[_]
-
-    clusterpolicies := [policy | policy = input[_]; policy.kind == "ClusterPolicy"]
-    labels_match(work, pod)
-    cluster_policies_connected_to_pod := [policy | policy = clusterpolicies[_]; check_kyverno(work, policy)]
-    count(cluster_policies_connected_to_pod) > 0
-
-    msga := {
-        "alertMessage": sprintf("Workload %v does have Kyverno ClusterPolicy", [pod.metadata.name]),
-        "packagename": "armo_builtins",
-        "alertScore": 7,
-        "failedPaths": [],
-        "fixPaths": [],
-        "alertObject": {
-            "k8sApiObjects": [pod]
-        }
-    }
-}
-
 policy_in_workload_config(work, policy) {
     some i
     some p
