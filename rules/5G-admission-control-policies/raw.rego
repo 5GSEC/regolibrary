@@ -42,7 +42,7 @@ deny[msga] {
         "packagename": "armo_builtins",
         "alertScore": 7,
         "failedPaths": [],
-        "fixPaths": [{"path": sprintf("Add ClusterPolicy %v to WorkloadConfig", [missing_policies[i].metadata.name]), "value":"false"}],
+        "fixPaths": [{"path": sprintf("Add Kyverno ClusterPolicy %v to the cluster", [missing_policies[_].metadata.name]), "value":""}],
         "alertObject": {
             "k8sApiObjects": [pod]
         }
