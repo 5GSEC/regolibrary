@@ -1,0 +1,27 @@
+{
+    "name": "Prevent use of third-party software deployment tools",
+    "attributes": {
+    },
+    "description": "Adversaries may gain access to and use third-party software suites installed within an enterprise network, such as administration, monitoring, and deployment systems, to move laterally through the network",
+    "remediation": "Create a Kubearmor policy to prevent installation of third party software deployment tools.",
+    "rulesNames": [
+        "5G-least-permissive-policies"
+    ],
+    "long_description": "An adversary may use CI/CD tools to gain access to production hosts/VNFs for discovery, data exfiltration and for deployment of lateral movements tools.",
+    "test": "Check that there are no pods which allow third party software deployment tools",
+    "id": "MITRE-FGT1072",
+    "controlID": "MITRE-FGT1072",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

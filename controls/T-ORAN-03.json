@@ -1,16 +1,16 @@
 {
-    "name": "Admission Control Policies",
+    "name": "Exploit weak authentication and access control to penetrate O-RAN network boundary",
     "attributes": {
     },
-    "description": "There should be admission controller policies for the defined 5G workloads",
+    "description": "Attacks from the internet exploit weak authentication and access control to penetrate O-RAN network boundary",
     "remediation": "Create a Kubearmor policy for the given assets",
     "rulesNames": [
-        "5G-admission-control-policies"
+        "5G-egress-ingress-defined"
     ],
-    "long_description": "There should be admission controller policies for the defined 5G workloads",
+    "long_description": "Attacks from the internet exploit weak authentication and access control to penetrate O-RAN network boundary",
     "test": "Check that there are no pods which do not have admission control policies as defined in the workload config",
-    "id": "5G-0003",
-    "controlID": "5G-0003",
+    "id": "T-ORAN-03",
+    "controlID": "T-ORAN-03",
     "baseScore": 8.0, 
     "scanningScope": {
         "matches": [

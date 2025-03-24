@@ -1,0 +1,27 @@
+{
+    "name": "No Egress connections should be allowed from NRF at runtime.",
+    "attributes": {
+    },
+    "description": "No Egress connections should be allowed from NRF at runtime.",
+    "remediation": "Create a Kubearmor policy to prevent installation of third party software deployment tools.",
+    "rulesNames": [
+        "5G-egress-ingress-defined"
+    ],
+    "long_description": "No Egress connections should be allowed from NRF at runtime.",
+    "test": "Check that there are no pods which allow third party software deployment tools",
+    "id": "3GPP-33.501",
+    "controlID": "3GPP-33.501",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

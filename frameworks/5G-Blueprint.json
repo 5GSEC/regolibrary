@@ -9,45 +9,33 @@
     ],
     "activeControls": [
         {
-            "controlID": "5G-0001",
+            "controlID": "T-ORAN-01",
             "patch": {
                 "name": "Ingress/Egress from the necessary workloads"
             }
         },
         {
-            "controlID": "5G-0002",
+            "controlID": "T-ORAN-02",
             "patch": {
-                "name": "Least Permissive Policies for Sensitive Assets"
+                "name": "Misconfigured or poorly configured O-RAN components"
             }
         },
         {
-            "controlID": "5G-0003",
+            "controlID": "T-ORAN-03",
             "patch": {
-                "name": "Admission Control Policies"
+                "name": "Exploit weak authentication and access control to penetrate O-RAN network boundary"
             }     
         },
         {
-            "controlID": "C-0046",
+            "controlID": "MITRE-FGT1072",
             "patch": {
-                "name": "Insecure capabilities"
-            }           
+                "name": "Prevent use of third-party software deployment tools"
+            }     
         },
         {
-            "controlID": "C-0016",
+            "controlID": "3GPP-33.501",
             "patch": {
-                "name": "Allow privilege escalation"
-            }               
-        },
-        {
-            "controlID": "C-0267",
-            "patch": {
-                "name": "Workload with cluster takeover roles"
-            }              
-        },
-        {
-            "controlID": "C-0083",
-            "patch": {
-                "name": "Workloads with Critical vulnerabilities exposed to external traffic"
+                "name": "No Egress connections should be allowed from NRF at runtime."
             }     
         }
     ]

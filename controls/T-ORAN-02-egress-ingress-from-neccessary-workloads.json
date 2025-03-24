@@ -1,0 +1,28 @@
+{
+    "name": "misconfigured or poorly configured O-RAN components",
+    "attributes": {
+    },
+    "description": "An attacker exploits misconfigured or poorly configured O-RAN components",
+    "remediation": "Create a network policy to add an egress rule",
+    "rulesNames": [
+        "5G-egress-ingress-defined",
+        "5G-admission-control-policies"
+    ],
+    "long_description": "Unauthenticated/unauthorized access to O-RAN components could possibly be achieved via the different O-RAN interfaces, depending upon the configuration of the hardware-software O-RAN system.",
+    "test": "Check that there are ingress/egress defined, as well as admission controller policies",
+    "id": "T-ORAN-02",
+    "controlID": "T-ORAN-02",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}
