@@ -1,5 +1,5 @@
 {
-    "name": "5GBlueprint",
+    "name": "5GBlueprint-CORE",
     "description": "Framework for scanning 5G workloads",
     "attributes": {
         "builtin": true
