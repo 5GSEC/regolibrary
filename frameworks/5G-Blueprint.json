@@ -11,7 +11,7 @@
         {
             "controlID": "T-ORAN-01",
             "patch": {
-                "name": "Ingress/Egress from the necessary workloads"
+                "name": "Least Permissive Policies"
             }
         },
         {
@@ -33,9 +33,9 @@
             }     
         },
         {
-            "controlID": "3GPP-33.501",
+            "controlID": "T-ORAN-07",
             "patch": {
-                "name": "No Egress connections should be allowed from NRF at runtime."
+                "name": "Least Permissive Policies for log files protection applied"
             }     
         }
     ]

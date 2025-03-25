@@ -1,0 +1,27 @@
+{
+    "name": "Least Permissive Policies for log files protection applied",
+    "attributes": {
+    },
+    "description": "An attacker compromises O-RAN monitoring mechanisms and log files integrity and availability",
+    "remediation": "Create a Kubearmor policy for the given assets",
+    "rulesNames": [
+        "5G-least-permissive-policies"
+    ],
+    "long_description": "An attacker compromises O-RAN monitoring mechanisms and log files integrity and availability",
+    "test": "Check that there are no pods which do not have admission control policies as defined in the workload config",
+    "id": "T-ORAN-07",
+    "controlID": "T-ORAN-07",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}
