@@ -1,0 +1,27 @@
+{
+    "name": "Least Permissive Policies for Sensitive Assets on CORE NFs",
+    "attributes": {
+    },
+    "description": "An adversary, such as an insider to the MNO or vendor, may install a malicious NF into the core network, in order to launch other attacks or get access to information.",
+    "remediation": "Create a Kubearmor policy for least permissive policies on NFs",
+    "rulesNames": [
+        "5G-least-permissive-policies"
+    ],
+    "long_description": "An adversary, such as an insider to the MNO or vendor, may install a malicious NF into the core network, in order to launch other attacks or get access to information.",
+    "test": "Test",
+    "id": "MITRE-FGT5007",
+    "controlID": "MITRE-FGT5007",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

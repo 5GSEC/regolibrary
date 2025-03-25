@@ -1,0 +1,27 @@
+{
+    "name": "Only UDM, PCF, and NEF can connect to Ingress on UDR",
+    "attributes": {
+    },
+    "description": "Only UDM, PCF, and NEF can connect to Ingress on UDR",
+    "remediation": "Only UDM, PCF, and NEF can connect to Ingress on UDR",
+    "rulesNames": [
+        "5G-egress-ingress-defined"
+    ],
+    "long_description": "Only UDM, PCF, and NEF can connect to Ingress on UDR",
+    "test": "Only UDM, PCF, and NEF can connect to Ingress on UDR",
+    "id": "3GPP-4.2.5",
+    "controlID": "3GPP-4.2.5",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

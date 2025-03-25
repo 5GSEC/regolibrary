@@ -1,0 +1,36 @@
+{
+    "name": "5GBlueprint",
+    "description": "Framework for scanning 5G workloads",
+    "attributes": {
+        "builtin": true
+    },
+    "typeTags": [
+        "security"
+    ],
+    "activeControls": [
+        {
+            "controlID": "FGT5007",
+            "patch": {
+                "name": "Least Permissive Policies for Sensitive Assets on CORE NFs"
+            }
+        },
+        {
+            "controlID": "MITRE-FGT1072",
+            "patch": {
+                "name": "Prevent use of third-party software deployment tools"
+            }     
+        },
+        {
+            "controlID": "3GPP-33.501",
+            "patch": {
+                "name": "No Egress connections should be allowed from NRF at runtime."
+            }     
+        },
+        {
+            "controlID": "3GPP-4.2.5",
+            "patch": {
+                "name": "Only UDM, PCF, and NEF can connect to Ingress on UDR"
+            }  
+        }
+    ]
+}
