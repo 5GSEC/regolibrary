@@ -9,7 +9,7 @@
     ],
     "activeControls": [
         {
-            "controlID": "FGT5007",
+            "controlID": "MITRE-FGT5007",
             "patch": {
                 "name": "Least Permissive Policies for Sensitive Assets on CORE NFs"
             }
