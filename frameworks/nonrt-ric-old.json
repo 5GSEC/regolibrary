@@ -1,0 +1,48 @@
+{
+    "name": "Non-RT-RIC-Framework-Old",
+    "description": "Framework for scanning Non-RT-RIC workloads",
+    "attributes": {
+        "builtin": true
+    },
+    "typeTags": [
+        "security"
+    ],
+    "activeControls": [
+        {
+            "controlID": "T-NONRTRIC-02",
+            "patch": {
+                "name": "Prevent UE tracking in the Non-RT-RIC"
+            }
+        },
+        {
+            "controlID": "T-NONRTRIC-03",
+            "patch": {
+                "name": "Prevent data corruption/modification of Non-RT-RIC componenets"
+            }
+        },
+        {
+            "controlID": "T-rAPP-01",
+            "patch": {
+                "name": "Mitigate exploitation of vulnerabilites in rApp"
+            }
+        },
+        {
+            "controlID": "T-rAPP-02",
+            "patch": {
+                "name": "Exploiting misconfigurations in rApp"
+            }
+        },
+        {
+            "controlID": "T-rAPP-03",
+            "patch": {
+                "name": "Malicious rApp deployment"
+            }
+        },
+        {
+            "controlID": "T-rAPP-04",
+            "patch": {
+                "name": "Injecton attacks to bypass auth"
+            }
+        }
+    ]
+}

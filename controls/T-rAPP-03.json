@@ -1,0 +1,26 @@
+{
+    "name": "Malicious rApp deployment",
+    "attributes": {
+    },
+    "description": "An attacker deploys and exploits a malicious rApp",
+    "remediation": "Only allow images from approved registries using ClusterPolicy",
+    "rulesNames": [
+        "5G-admission-control-policies"
+    ],
+    "long_description": "Malicious rApps could impact non-RT RIC functions such as AI/ML model training, A1 policy management, Enrichment information management, Network Configuration Optimization in the purpose of performance degradation, DoS, enrichment data sniffing, etc",
+    "test": "Test",
+    "controlID": "T-rAPP-03",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

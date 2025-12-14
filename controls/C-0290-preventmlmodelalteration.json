@@ -1,0 +1,26 @@
+{
+    "name": "Prevent alteration of ML models in Non-RT-RIC Workloads",
+    "attributes": {
+    },
+    "description": "Adversaries may gain unauthorized access to machine learning model files, which can lead to model poisoning or other forms of manipulation.",
+    "remediation": "Create admission control policies to enforce strict access control to infrastructure and application supporting AI/ML operations.",
+    "rulesNames": [
+        "5G-admission-control-policies"
+    ],
+    "long_description": "A nefarious change on ML models or data can cause drastic change in behavior of O-RAN components including network outage.",
+    "test": "Test",
+    "controlID": "C-0290",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

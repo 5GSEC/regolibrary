@@ -1,0 +1,27 @@
+{
+    "name": "Vulnerabilites in rApp",
+    "attributes": {
+    },
+    "description": "An attacker exploits rApp vulnerabilities",
+    "remediation": "Create zero trust Kubearmor policies for runtime hardening, least privilege access Kyverno policies",
+    "rulesNames": [
+        "5G-kubearmor-policies",
+        "5G-admission-control-policies"
+    ],
+    "long_description": "f attackers can find exploitable rApp, they can potentially force a data breach, disrupt the offered network service. and take over another rApp or the non-RT RIC.",
+    "test": "Test",
+    "controlID": "T-rAPP-01",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

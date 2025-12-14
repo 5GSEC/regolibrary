@@ -1,0 +1,26 @@
+{
+    "name": "Create zero trust Kubearmor policies",
+    "attributes": {
+    },
+    "description": "Create zero trust policies.",
+    "remediation": "Create zero trust Kubearmor policies for runtime",
+    "rulesNames": [
+        "5G-least-permissive-policies"
+    ],
+    "long_description": "An attacker penetrates the Non-RT RIC through the SMO and attempts to trigger a Denial of Service or degrade the performance of non-RT RIC",
+    "test": "Test",
+    "controlID": "C-0291",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Kubearmor-policies",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

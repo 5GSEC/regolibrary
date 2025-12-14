@@ -1,0 +1,121 @@
+{
+    "name": "near-rt-ric-framework",
+    "description": "Framework for scanning Non-RT-RIC workloads",
+    "attributes": {
+        "builtin": true
+    },
+    "typeTags": [
+        "security",
+        "compliance"
+    ],
+    "activeControls": [
+        {
+            "controlID": "C-0034",
+            "patch": {
+                "name": "Prevent automatic mapping of service account"
+            }
+        },
+        {
+            "controlID": "C-0053",
+            "patch": {
+                "name": "Control checks if RBAC is enabled for SA"
+            }
+        },
+        {
+            "controlID": "C-0282",
+            "patch": {
+                "name": "Minimize access to the service account token creation"
+            }
+        },
+        {
+            "controlID": "C-0048",
+            "patch": {
+                "name": "Identify pods using HostPath mount"
+            }
+        },
+        {
+            "controlID": "C-0078",
+            "patch": {
+                "name": "Images from allowed registry"
+            }
+        },
+        {
+            "controlID": "C-0211",
+            "patch": {
+                "name": "Apply Security Context to Your Pods and Containers"
+            }
+        },
+        {
+            "controlID": "C-0041",
+            "patch": {
+                "name": "Identify pods using Host network access"
+            }
+        },
+        {
+            "controlID": "C-0054",
+            "patch": {
+                "name": "Check network policies to limit which pods can talk to which"
+            }
+        },
+        {
+            "controlID": "C-0066",
+            "patch": {
+                "name": "Secret/etcd encryption enabled"
+            }
+        },
+        {
+            "controlID": "C-0004",
+            "patch": {
+                "name": "Ensure memory limits and requests are set for all containers"
+            }
+        },
+        {
+            "controlID": "C-0264",
+            "patch": {
+                "name": "PersistentVolume without encyption"
+            }
+        },
+        {
+            "controlID": "C-0237",
+            "patch": {
+                "name": "Ensures that all images contain some signature"
+            }
+        },
+        {
+            "controlID": "C-0037",
+            "patch": {
+                "name": "Identify all subjects allowed to update the 'coredns' configmap"
+            }
+        },
+        {
+            "controlID": "C-0035",
+            "patch": {
+                "name": "Determine subjects that have cluster admin permissions"
+            }
+        },
+        {
+            "controlID": "C-0038",
+            "patch": {
+                "name": "Identify all pods using hostPID or hostIPC privileges."
+            }
+        },
+        {
+            "controlID": "C-0291",
+            "patch": {
+                "name": "Apply kubearmor policies for runtime security for Non-RT workloads"    
+            }
+        },
+        {
+            "controlID": "C-0189",
+            "patch": {
+                "name": "Ensure that default service accounts are not actively used"
+            }
+        },
+        {
+            "controlID": "C-0263", 
+            "patch": {
+                "name": "Detect Ingress resources that do not use TLS"
+            }
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "name": "5G-kubearmor-policies",
+    "attributes": {
+    },
+    "ruleLanguage": "Rego",
+    "match": [
+      {
+        "apiGroups": [
+          "apps"
+        ],
+        "apiVersions": [
+          "v1"
+        ],
+        "resources": [
+            "Deployment"
+        ]
+      },
+      {
+        "apiGroups": [
+          "security.kubearmor.com"
+        ],
+        "apiVersions": [
+          "v1"
+        ],
+        "resources": [
+            "KubeArmorPolicy"
+        ]
+      },
+      {
+        "apiGroups": [
+          "security.seran.org"
+        ],
+        "apiVersions": [
+          "v1alpha1"
+        ], 
+        "resources": [
+            "WorkloadConfig"
+        ]       
+      }
+    ],
+    "ruleDependencies": [
+    ],
+    "description": "fails if there are no kubearmor controller policies for the defined 5G pod",
+    "remediation": "Make sure you define kubearmor policies for all your Pods",
+    "ruleQuery": "armo_builtins"
+}

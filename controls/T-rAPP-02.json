@@ -1,0 +1,28 @@
+{
+    "name": "Exploiting misconfigurations in rApp",
+    "attributes": {
+    },
+    "description": "An attacker exploits rApp misconfigurations",
+    "remediation": "Create zero trust Kubearmor policies, least privilege access Kyverno policies, and network policies to restrict traffic only to required services",
+    "rulesNames": [
+        "5G-kubearmor-policies",
+        "5G-admission-control-policies",
+        "5G-egress-ingress-defined"
+    ],
+    "long_description": "Security misconfiguration, such as open ports or enabled unused protocols, can potentially exist in an rApp. If attackers can find exploitable rApp, they can disrupt the offered network service and potentially take over another rApp or the whole non-RT RIC",
+    "test": "Test",
+    "controlID": "T-rAPP-02",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

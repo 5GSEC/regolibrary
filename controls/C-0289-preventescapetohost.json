@@ -1,0 +1,27 @@
+{
+    "name": "Prevent escape to host from Non-RT-RIC Workloads",
+    "attributes": {
+    },
+    "description": "Adversaries may break out of a container to gain access to the underlying host.",
+    "remediation": "Create Kubearmor policy and admission control policies",
+    "rulesNames": [
+        "5G-least-permissive-policies",
+        "5G-admission-control-policies"
+    ],
+    "long_description": "Adversaries may break out of a container to gain access to the underlying host. This can allow an adversary access to other containerized resources from the host level or to the host itself.",
+    "test": "Test",
+    "controlID": "C-0289",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

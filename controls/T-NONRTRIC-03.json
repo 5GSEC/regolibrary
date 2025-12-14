@@ -1,0 +1,28 @@
+{
+    "name": "Data corruption/Modification of Non-RT-RIC componenets",
+    "attributes": {
+    },
+    "description": "An attacker gains access to the Non-RT-RIC through the SMO to cause Data corruption/modification",
+    "remediation": "Create zero trust Kubearmor policies, least privilege access Kyverno policies, and network policies.",
+    "rulesNames": [
+        "5G-kubearmor-policies",
+        "5G-admission-control-policies",
+        "5G-egress-ingress-defined"
+    ],
+    "long_description": "An attacker gains access to the Non-RT-RIC through the SMO to cause Data corruption/modification",
+    "test": "Test",
+    "controlID": "T-NONRTRIC-03",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}

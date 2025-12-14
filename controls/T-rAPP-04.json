@@ -1,0 +1,26 @@
+{
+    "name": "Injecton attacks to bypass auth",
+    "attributes": {
+    },
+    "description": "An attacker bypasses authentication and authorization using an injection attack",
+    "remediation": "Deny rApps from executing arbitrary interpreters by creating zero trust Kubearmor policies",
+    "rulesNames": [
+        "5G-kubearmor-policies"
+    ],
+    "long_description": "It is possible that an attacker to submit requests without prior authentication and authorization by executing an injection attack to manipulate configurations, access logs, perform remote code execution, etc.",
+    "test": "Test",
+    "controlID": "T-rAPP-04",
+    "baseScore": 8.0, 
+    "scanningScope": {
+        "matches": [
+            "cluster",
+            "file"
+        ]
+    },
+     "category": {
+        "name" : "Workload",
+        "subCategory": {
+            "name": "Resource management"
+        }
+   }
+}
